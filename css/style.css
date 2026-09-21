@@ -1,0 +1,514 @@
+/* ==========================================================================
+   Resit Mudah - Modern CSS Styling
+   Berasaskan Bootstrap 5.3.x dengan Penyesuaian Tema Dinamik
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #0d9488; /* Emerald Teal default */
+  --primary-rgb: 13, 148, 136;
+  --primary-hover: #0f766e;
+  --primary-light: #f0fdfa;
+  --body-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --receipt-border: #cbd5e1;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--body-bg);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   Navbar & Header
+   ========================================================================== */
+.app-navbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-badge {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+}
+
+/* ==========================================================================
+   Card & Section Styling
+   ========================================================================== */
+.card-custom {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card-custom:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title i {
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   Theme & Logo Customizer Styling
+   ========================================================================== */
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.swatch-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px #cbd5e1;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.swatch-btn:hover {
+  transform: scale(1.15);
+}
+
+.swatch-btn.active {
+  box-shadow: 0 0 0 2px #0f172a;
+  transform: scale(1.15);
+}
+
+.custom-color-picker-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.custom-color-input {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #cbd5e1;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background: transparent;
+}
+
+.custom-color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.custom-color-input::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+/* Logo Uploader Dropzone */
+.logo-upload-zone {
+  border: 2px dashed #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logo-upload-zone:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.logo-preview-box {
+  position: relative;
+  display: inline-block;
+  max-width: 140px;
+}
+
+.logo-preview-box img {
+  max-height: 70px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  padding: 0.25rem;
+}
+
+.btn-remove-logo {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Form Controls Modern Polish
+   ========================================================================== */
+.form-control, .form-select {
+  border-color: var(--border-color);
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.92rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.15);
+}
+
+.form-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.35rem;
+}
+
+.input-group-text {
+  background-color: #f1f5f9;
+  border-color: var(--border-color);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* Table item rows */
+.table-items th {
+  background: #f8fafc;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.btn-add-item {
+  color: var(--primary-color);
+  background: var(--primary-light);
+  border: 1px dashed rgba(var(--primary-rgb), 0.4);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 0.6rem;
+  transition: all 0.15s ease;
+}
+
+.btn-add-item:hover {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Receipt Preview Canvas
+   ========================================================================== */
+.preview-container {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.receipt-sheet {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 2.25rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Template: Standard A4 / Minimalist */
+.receipt-sheet.template-standard {
+  max-width: 100%;
+  font-size: 0.95rem;
+}
+
+/* Template: POS / Thermal 80mm */
+.receipt-sheet.template-thermal {
+  max-width: 380px;
+  margin: 0 auto;
+  font-family: 'Space Mono', monospace, sans-serif;
+  font-size: 0.82rem;
+  padding: 1.5rem 1.25rem;
+  border-radius: 0;
+  border: 1px dashed #94a3b8;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.receipt-sheet.template-thermal .thermal-divider {
+  border-top: 1px dashed #64748b;
+  margin: 0.75rem 0;
+}
+
+/* Receipt Header Elements */
+.receipt-header-bar {
+  height: 6px;
+  background: var(--primary-color);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.receipt-logo-display {
+  max-height: 65px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.receipt-biz-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.receipt-biz-meta {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.receipt-title-badge {
+  color: var(--primary-color);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  font-size: 1.25rem;
+}
+
+/* Status Badge */
+.status-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.4rem;
+  text-transform: uppercase;
+}
+
+.status-pill.status-paid {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.status-pill.status-unpaid {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.status-pill.status-deposit {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+/* Receipt Items Table */
+.receipt-table {
+  width: 100%;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-collapse: collapse;
+}
+
+.receipt-table th {
+  border-bottom: 2px solid var(--primary-color);
+  padding: 0.6rem 0.5rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.receipt-table td {
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.88rem;
+  vertical-align: top;
+}
+
+.receipt-sheet.template-thermal .receipt-table th {
+  border-bottom: 1px dashed #0f172a;
+  color: #0f172a;
+}
+
+.receipt-sheet.template-thermal .receipt-table td {
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+/* Totals Summary Breakdown */
+.receipt-totals-list {
+  font-size: 0.88rem;
+}
+
+.receipt-totals-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  color: #475569;
+}
+
+.receipt-grand-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.5rem;
+  background: var(--primary-light);
+  border-radius: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 800;
+  font-size: 1.15rem;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+}
+
+.receipt-sheet.template-thermal .receipt-grand-total {
+  background: transparent;
+  border-top: 2px solid #0f172a;
+  border-bottom: 2px solid #0f172a;
+  border-radius: 0;
+  color: #0f172a;
+  padding: 0.5rem 0;
+}
+
+/* Payment & Notes */
+.receipt-footer-box {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.receipt-thankyou-msg {
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.receipt-sheet.template-thermal .receipt-thankyou-msg {
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   Mobile Nav Tabs for Switching View
+   ========================================================================== */
+.mobile-view-nav {
+  display: none;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+@media (max-width: 991.98px) {
+  .mobile-view-nav {
+    display: flex;
+  }
+  
+  .tab-pane-mobile {
+    display: none;
+  }
+  
+  .tab-pane-mobile.active {
+    display: block;
+  }
+  
+  .preview-container {
+    position: static;
+    margin-top: 1rem;
+  }
+  
+  .receipt-sheet {
+    padding: 1.25rem;
+  }
+}
+
+/* ==========================================================================
+   Floating Action Buttons & Quick Badges
+   ========================================================================== */
+.badge-privacy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  background: #ecfdf5;
+  color: #047857;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid #a7f3d0;
+}
+
+.btn-primary-custom {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.6rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-custom:hover, .btn-primary-custom:focus {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+}
+
+.btn-outline-primary-custom {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  font-weight: 600;
+  border-radius: 0.6rem;
+}
+
+.btn-outline-primary-custom:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* Toast Notification */
+.toast-container {
+  z-index: 2000;
+}

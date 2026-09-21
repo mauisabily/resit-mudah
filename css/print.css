@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Resit Mudah - Print Stylesheet (Hanya Bahagian Resit Sahaja Yang Dicetak)
+   Dioptimumkan untuk Cetakan A4/A5 dan Kertas Terma POS 80mm/58mm
+   ========================================================================== */
+
+@media print {
+  /* 1. Sembunyikan SEMUA elemen UI selain daripada bekas resit */
+  .no-print,
+  #formColumn,
+  .form-section,
+  .app-navbar,
+  .mobile-view-nav,
+  footer,
+  .btn,
+  .modal,
+  .toast,
+  .toast-container,
+  .alert,
+  .badge-privacy {
+    display: none !important;
+  }
+
+  /* 2. Bersihkan body dan buang semua margin/padding/shadow pelayar */
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 3. Meneutralkan susun atur grid Bootstrap supaya hanya resit dipaparkan */
+  main,
+  .container-fluid,
+  .row {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #previewColumn {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: static !important;
+  }
+
+  .preview-container {
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 4. Paparan Dokumen Kertas Resit Sebenar */
+  .receipt-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+  }
+
+  /* Templat Standard A4 */
+  .receipt-sheet.template-standard {
+    max-width: 100% !important;
+    padding: 6mm 10mm !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  /* Templat POS Terma (Kertas Haba 80mm) */
+  .receipt-sheet.template-thermal {
+    max-width: 320px !important;
+    width: 320px !important;
+    margin: 0 auto !important;
+    padding: 2mm !important;
+    font-size: 11px !important;
+    border: none !important;
+  }
+
+  /* 5. Pastikan jadual dan teks tidak terpotong */
+  .receipt-table {
+    width: 100% !important;
+    page-break-inside: auto;
+  }
+
+  .receipt-table tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  /* Konfigurasi margin kertas cetakan */
+  @page {
+    size: auto;
+    margin: 6mm;
+  }
+
+  body.is-thermal-mode @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+}

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resit Mudah - Penjana Resit Percuma & Privasi Terjamin</title>
+  <meta name="description" content="Penjana resit jualan terbuka, percuma dan moden. 100% data disimpan dalam pelayar pengguna (Privacy-first). Sokongan cetakan A4 dan pencetak terma POS.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧾</text></svg>">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons 1.11.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg app-navbar no-print py-2">
+    <div class="container-fluid px-3 px-lg-4">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="#">
+        <span class="fs-4">🧾</span>
+        <span>Resit<span style="color: var(--primary-color);">Mudah</span></span>
+        <span class="brand-badge ms-1"><i class="bi bi-shield-check me-1"></i>100% Tempatan</span>
+      </a>
+
+      <!-- Quick Action Buttons on Navbar -->
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#backupModal" title="Sandaran & Pulihkan Data">
+          <i class="bi bi-database me-1"></i><span class="d-none d-sm-inline">Data</span>
+        </button>
+        <button type="button" class="btn btn-outline-primary-custom btn-sm rounded-pill px-3" id="btnShareWa" title="Kongsi ke WhatsApp">
+          <i class="bi bi-whatsapp me-1 text-success"></i><span class="d-none d-sm-inline">WhatsApp</span>
+        </button>
+        <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" id="btnDownloadPdfTop" title="Muat Turun Fail PDF">
+          <i class="bi bi-file-earmark-pdf-fill me-1"></i><span class="d-none d-sm-inline">Simpan PDF</span>
+        </button>
+        <button type="button" class="btn btn-primary-custom btn-sm rounded-pill px-3 shadow-sm" id="btnPrintTop">
+          <i class="bi bi-printer-fill me-1"></i><span>Cetak</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Tab Switcher (Visible only on < 992px) -->
+  <div class="mobile-view-nav no-print p-2 justify-content-center gap-2">
+    <button class="btn btn-sm btn-primary-custom rounded-pill px-4 active" id="tabBtnForm">
+      <i class="bi bi-pencil-square me-1"></i>Borang Input
+    </button>
+    <button class="btn btn-sm btn-outline-secondary rounded-pill px-4" id="tabBtnPreview">
+      <i class="bi bi-eye-fill me-1"></i>Pratonton Resit
+    </button>
+  </div>
+
+  <!-- Main Container -->
+  <main class="container-fluid px-3 px-lg-4 py-3">
+    <div class="row g-4">
+      
+      <!-- ==========================================
+           LEFT COLUMN: Borang Input & Tetapan
+           ========================================== -->
+      <div class="col-lg-6 col-xl-7 form-section no-print" id="formColumn">
+
+        <!-- Card 1: Penyesuaian Jenama (Logo & Tema Warna) -->
+        <div class="card card-custom p-3 p-md-4 mb-4">
+          <div class="section-title">
+            <i class="bi bi-palette-fill"></i> Identiti Jenama & Tema Warna
+          </div>
+          
+          <div class="row g-3 align-items-center">
+            <!-- Theme Color Selector -->
+            <div class="col-md-7">
+              <label class="form-label d-block">Pilih Warna Tema Resit:</label>
+              <div class="color-swatches">
+                <button type="button" class="swatch-btn active" data-color="#0d9488" style="background-color: #0d9488;" title="Teal Emerald"></button>
+                <button type="button" class="swatch-btn" data-color="#2563eb" style="background-color: #2563eb;" title="Royal Blue"></button>
+                <button type="button" class="swatch-btn" data-color="#4f46e5" style="background-color: #4f46e5;" title="Indigo"></button>
+                <button type="button" class="swatch-btn" data-color="#7c3aed" style="background-color: #7c3aed;" title="Purple"></button>
+                <button type="button" class="swatch-btn" data-color="#d97706" style="background-color: #d97706;" title="Warm Amber"></button>
+                <button type="button" class="swatch-btn" data-color="#e11d48" style="background-color: #e11d48;" title="Rose Red"></button>
+                <button type="button" class="swatch-btn" data-color="#334155" style="background-color: #334155;" title="Slate Dark"></button>
+                
+                <!-- Custom Color Picker -->
+                <div class="custom-color-picker-wrapper ms-2" title="Pilih warna tersuai">
+                  <input type="color" id="customColorPicker" class="custom-color-input" value="#0d9488">
+                </div>
+              </div>
+            </div>
+
+            <!-- Logo Uploader -->
+            <div class="col-md-5">
+              <label class="form-label d-block">Logo Perniagaan:</label>
+              <div id="logoUploadArea">
+                <!-- Dropzone / Input -->
+                <div class="logo-upload-zone" id="logoDropZone" onclick="document.getElementById('logoFileInput').click();">
+                  <i class="bi bi-cloud-arrow-up fs-4 d-block text-secondary"></i>
+                  <span class="small fw-semibold text-secondary">Muat Naik Logo</span>
+                  <input type="file" id="logoFileInput" accept="image/png, image/jpeg, image/svg+xml, image/webp" class="d-none">
+                </div>
+                <!-- Preview Thumbnail (Hidden initially) -->
+                <div class="logo-preview-box d-none mt-1" id="logoPreviewContainer">
+                  <img id="logoImgPreview" src="" alt="Logo Preview">
+                  <button type="button" class="btn btn-danger btn-remove-logo" id="btnRemoveLogo" title="Padam Logo">
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Maklumat Perniagaan -->
+        <div class="card card-custom p-3 p-md-4 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="section-title mb-0">
+              <i class="bi bi-building"></i> Maklumat Perniagaan Anda
+            </div>
+            <span class="badge bg-light text-muted fw-normal border">Autosimpan</span>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="form-label" for="bizName">Nama Kedai / Syarikat *</label>
+              <input type="text" class="form-control" id="bizName" placeholder="Contoh: Kafebit Enterprise" value="Kedai Kopi & Roti Madu">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="bizRegNo">No. Pendaftaran (SSM)</label>
+              <input type="text" class="form-control" id="bizRegNo" placeholder="Contoh: 202301029384" value="202301048291 (00345678-X)">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="bizPhone">No. Telefon / WhatsApp</label>
+              <input type="text" class="form-control" id="bizPhone" placeholder="+6012-3456789" value="+6013-8822991">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="bizEmail">Emel / Laman Web</label>
+              <input type="text" class="form-control" id="bizEmail" placeholder="info@perniagaan.com" value="resit@kopimadu.my">
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="bizAddress">Alamat Premis / Operasi</label>
+              <textarea class="form-control" id="bizAddress" rows="2" placeholder="Alamat penuh perniagaan">No. 12, Jalan Komersial 2, Bandar Baru Bangi, 43650 Selangor</textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Butiran Resit & Pelanggan -->
+        <div class="card card-custom p-3 p-md-4 mb-4">
+          <div class="section-title">
+            <i class="bi bi-receipt"></i> Butiran Resit & Pelanggan
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label" for="receiptNo">No. Resit *</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="receiptNo" value="INV-2026-001">
+                <button class="btn btn-outline-secondary" type="button" id="btnGenReceiptNo" title="Jana No Baru">
+                  <i class="bi bi-arrow-clockwise"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="receiptDate">Tarikh *</label>
+              <input type="date" class="form-control" id="receiptDate">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="paymentStatus">Status Bayaran</label>
+              <select class="form-select" id="paymentStatus">
+                <option value="PAID" selected>Telah Dibayar (PAID)</option>
+                <option value="UNPAID">Belum Dibayar (UNPAID)</option>
+                <option value="DEPOSIT">Deposit</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="custName">Nama Pelanggan</label>
+              <input type="text" class="form-control" id="custName" placeholder="Nama penuh pelanggan" value="Ahmad Farhan">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="custPhone">No. Telefon Pelanggan</label>
+              <input type="text" class="form-control" id="custPhone" placeholder="+601x-xxxxxxx" value="+6017-9912831">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="paymentMethod">Kaedah Bayaran</label>
+              <select class="form-select" id="paymentMethod">
+                <option value="DuitNow QR" selected>DuitNow QR / SPay</option>
+                <option value="Pemindahan Bank (Online Transfer)">Pemindahan Bank (Online Transfer)</option>
+                <option value="Tunai (Cash)">Tunai (Cash)</option>
+                <option value="Kad Kredit / Debit">Kad Kredit / Debit</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="templateSelect">Format Templat Resit</label>
+              <select class="form-select" id="templateSelect">
+                <option value="standard" selected>Standard A4 / A5 (Rasmi)</option>
+                <option value="thermal">POS Terma 80mm (Kertas Haba)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Senarai Item / Produk / Servis -->
+        <div class="card card-custom p-3 p-md-4 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="section-title mb-0">
+              <i class="bi bi-cart-check"></i> Senarai Item & Servis
+            </div>
+            <button type="button" class="btn btn-add-item btn-sm px-3" id="btnAddItem">
+              <i class="bi bi-plus-circle me-1"></i>Tambah Baris
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-items align-middle mb-2" id="itemsTable">
+              <thead>
+                <tr>
+                  <th style="min-width: 180px;">Penerangan Item</th>
+                  <th style="width: 85px;" class="text-center">Kuantiti</th>
+                  <th style="width: 130px;" class="text-end">Harga (RM)</th>
+                  <th style="width: 130px;" class="text-end">Jumlah (RM)</th>
+                  <th style="width: 45px;"></th>
+                </tr>
+              </thead>
+              <tbody id="itemsTableBody">
+                <!-- Baris item akan dimasukkan melalui JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Ringkasan Tambahan (Diskaun, SST, Pos) -->
+          <div class="row justify-content-end mt-3 g-2">
+            <div class="col-sm-8 col-md-7 col-lg-6">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="small fw-semibold text-secondary">Diskaun:</span>
+                <div class="input-group input-group-sm" style="width: 140px;">
+                  <input type="number" step="0.01" min="0" class="form-control text-end" id="discountInput" value="0.00">
+                  <span class="input-group-text">RM</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="small fw-semibold text-secondary">Cukai / SST:</span>
+                <div class="input-group input-group-sm" style="width: 140px;">
+                  <input type="number" step="0.5" min="0" max="100" class="form-control text-end" id="taxInput" value="0">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="small fw-semibold text-secondary">Caj Penghantaran/Pos:</span>
+                <div class="input-group input-group-sm" style="width: 140px;">
+                  <input type="number" step="0.01" min="0" class="form-control text-end" id="shippingInput" value="0.00">
+                  <span class="input-group-text">RM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Maklumat Akaun & Nota Kaki -->
+        <div class="card card-custom p-3 p-md-4 mb-4">
+          <div class="section-title">
+            <i class="bi bi-bank"></i> Maklumat Bank & Nota Resit
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="bankInfo">Maklumat Bank / No. Akaun</label>
+              <input type="text" class="form-control" id="bankInfo" placeholder="Contoh: Maybank 512345678901 (Kafebit)" value="Maybank: 5621 8844 1029 (Kafebit Ent)">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="duitNowQrText">ID DuitNow / QR Info</label>
+              <input type="text" class="form-control" id="duitNowQrText" placeholder="Contoh: 0138822991 atau No SSM" value="DuitNow: 013-8822991">
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="receiptNotes">Nota Kaki / Polisi</label>
+              <textarea class="form-control" id="receiptNotes" rows="2" placeholder="Catatan di bahagian bawah resit">Terima kasih atas pembelian anda! Barangan yang telah dibeli tidak boleh dikembalikan.</textarea>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 mt-4 pt-2 border-top">
+            <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill" id="btnLoadSample">
+              <i class="bi bi-lightning-charge me-1"></i>Muat Contoh Data
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm rounded-pill ms-auto" id="btnClearForm">
+              <i class="bi bi-trash3 me-1"></i>Kosongkan Resit
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==========================================
+           RIGHT COLUMN: Live Preview Resit
+           ========================================== -->
+      <div class="col-lg-6 col-xl-5" id="previewColumn">
+        <div class="preview-container">
+          
+          <!-- Preview Control Toolbar -->
+          <div class="d-flex justify-content-between align-items-center mb-3 no-print">
+            <div class="d-flex align-items-center gap-2">
+              <span class="fw-bold small text-secondary">
+                <i class="bi bi-eye text-primary me-1"></i>Pratonton Masa Nyata
+              </span>
+              <span class="badge bg-secondary-subtle text-secondary" id="badgeTemplateType">Standard A4</span>
+            </div>
+
+            <div class="btn-group btn-group-sm">
+              <button type="button" class="btn btn-outline-dark" id="btnCopyText" title="Salin Teks Ringkasan">
+                <i class="bi bi-clipboard me-1"></i>Salin Teks
+              </button>
+              <button type="button" class="btn btn-outline-danger" id="btnDownloadPdfPreview" title="Simpan sebagai fail PDF">
+                <i class="bi bi-file-earmark-pdf-fill me-1"></i>Simpan PDF
+              </button>
+              <button type="button" class="btn btn-primary-custom" id="btnPrintMain">
+                <i class="bi bi-printer-fill me-1"></i>Cetak Resit
+              </button>
+            </div>
+          </div>
+
+          <!-- THE RECEIPT SHEET (Actual printed document) -->
+          <div class="receipt-sheet template-standard" id="receiptDocument">
+            
+            <!-- Top Color Accent Bar (Only on Standard template) -->
+            <div class="receipt-header-bar" id="receiptHeaderBar"></div>
+
+            <!-- Header: Company & Receipt Title -->
+            <div class="d-flex justify-content-between align-items-start gap-3">
+              <div>
+                <!-- Business Logo (if available) -->
+                <div id="receiptLogoContainer" class="mb-2 d-none">
+                  <img id="receiptLogoImg" class="receipt-logo-display" src="" alt="Business Logo">
+                </div>
+                <!-- Business Name & Details -->
+                <div class="receipt-biz-name" id="viewBizName">Kedai Kopi & Roti Madu</div>
+                <div class="receipt-biz-meta mt-1">
+                  <div id="viewBizRegNo"><span class="text-muted">No. SSM:</span> 202301048291 (00345678-X)</div>
+                  <div id="viewBizAddress">No. 12, Jalan Komersial 2, Bandar Baru Bangi, 43650 Selangor</div>
+                  <div id="viewBizContact">Tel: +6013-8822991 | Emel: resit@kopimadu.my</div>
+                </div>
+              </div>
+
+              <div class="text-end">
+                <div class="receipt-title-badge">RESIT RASMI</div>
+                <div class="mt-2">
+                  <span class="status-pill status-paid" id="viewPaymentStatus">TELAH DIBAYAR</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thermal Divider Line (Only visible in thermal mode) -->
+            <div class="thermal-divider d-none" id="thermalDivider1"></div>
+
+            <!-- Receipt Meta (No, Tarikh, Pelanggan) -->
+            <div class="row g-2 mt-3 pt-2 border-top" id="receiptMetaRow">
+              <div class="col-6">
+                <div class="small text-muted">Dikeluarkan Kepada:</div>
+                <div class="fw-bold text-dark" id="viewCustName">Ahmad Farhan</div>
+                <div class="small text-muted" id="viewCustPhone">+6017-9912831</div>
+              </div>
+              <div class="col-6 text-end">
+                <div class="small text-muted">No. Resit: <strong class="text-dark" id="viewReceiptNo">INV-2026-001</strong></div>
+                <div class="small text-muted">Tarikh: <span class="text-dark" id="viewReceiptDate">21/09/2026</span></div>
+                <div class="small text-muted">Kaedah: <span class="text-dark" id="viewPaymentMethod">DuitNow QR</span></div>
+              </div>
+            </div>
+
+            <!-- Thermal Divider Line -->
+            <div class="thermal-divider d-none" id="thermalDivider2"></div>
+
+            <!-- Items Table -->
+            <table class="receipt-table" id="viewReceiptTable">
+              <thead>
+                <tr>
+                  <th class="text-start">Item</th>
+                  <th class="text-center" style="width: 50px;">Ktt</th>
+                  <th class="text-end" style="width: 75px;">Harga</th>
+                  <th class="text-end" style="width: 80px;">Jumlah</th>
+                </tr>
+              </thead>
+              <tbody id="viewTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+
+            <!-- Summary Totals Section -->
+            <div class="row justify-content-end">
+              <div class="col-8 col-sm-7 col-md-6 receipt-totals-list">
+                <div class="receipt-totals-row">
+                  <span>Subtotal:</span>
+                  <span id="viewSubtotal">RM 0.00</span>
+                </div>
+                <div class="receipt-totals-row d-none" id="rowDiscount">
+                  <span>Diskaun:</span>
+                  <span id="viewDiscount">-RM 0.00</span>
+                </div>
+                <div class="receipt-totals-row d-none" id="rowTax">
+                  <span id="labelTax">Cukai (0%):</span>
+                  <span id="viewTax">RM 0.00</span>
+                </div>
+                <div class="receipt-totals-row d-none" id="rowShipping">
+                  <span>Penghantaran:</span>
+                  <span id="viewShipping">RM 0.00</span>
+                </div>
+                <div class="receipt-grand-total">
+                  <span>JUMLAH:</span>
+                  <span id="viewGrandTotal">RM 0.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thermal Divider Line -->
+            <div class="thermal-divider d-none" id="thermalDivider3"></div>
+
+            <!-- Footer: Bank info & Notes -->
+            <div class="receipt-footer-box">
+              <div id="viewBankInfo" class="mb-1">
+                <strong>Bayaran / Akaun:</strong> <span>Maybank: 5621 8844 1029</span>
+              </div>
+              <div id="viewDuitNow" class="mb-1">
+                <strong>DuitNow:</strong> <span>013-8822991</span>
+              </div>
+              <div class="text-muted fst-italic mt-2" id="viewNotes">
+                Terima kasih atas pembelian anda!
+              </div>
+              <div class="receipt-thankyou-msg" id="viewThankYou">
+                *** TERIMA KASIH ***
+              </div>
+            </div>
+
+          </div>
+          <!-- END RECEIPT SHEET -->
+
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- Footer with Privacy Statement -->
+  <footer class="text-center py-4 text-muted small border-top bg-white mt-5 no-print">
+    <div class="container">
+      <div class="mb-2">
+        <span class="badge-privacy">
+          <i class="bi bi-shield-lock-fill"></i> Data anda 100% selamat dalam pelayar anda sahaja.
+        </span>
+      </div>
+      <p class="mb-1">Resit Mudah &copy; 2026. Perisian Sumber Terbuka berteraskan privasi pengguna.</p>
+      <p class="mb-0">
+        <a href="https://github.com/mauisabily/resit-mudah" target="_blank" rel="noopener" class="text-decoration-none text-secondary">
+          <i class="bi bi-github me-1"></i>GitHub Repositori
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Modal: Sandaran & Pulihkan Data (JSON Backup & Restore) -->
+  <div class="modal fade" id="backupModal" tabindex="-1" aria-labelledby="backupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fw-bold" id="backupModalLabel">
+            <i class="bi bi-database me-2 text-primary"></i>Pengurusan Data Tempatan
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="alert alert-info py-2 small mb-3">
+            <i class="bi bi-info-circle me-1"></i> Semua data disimpan dalam <code>localStorage</code> pelayar ini sahaja. Anda boleh muat turun sandaran fail JSON untuk berpindah ke peranti lain.
+          </div>
+
+          <div class="d-grid gap-3">
+            <button type="button" class="btn btn-outline-primary" id="btnExportJson">
+              <i class="bi bi-download me-2"></i>Eksport Data (*.json)
+            </button>
+            
+            <div class="border-top pt-3">
+              <label class="form-label small fw-semibold">Pulihkan Data dari Fail JSON:</label>
+              <input type="file" id="importJsonInput" accept=".json" class="form-control form-control-sm">
+            </div>
+
+            <div class="border-top pt-3 text-center">
+              <button type="button" class="btn btn-sm btn-outline-danger" id="btnClearAllStorage">
+                <i class="bi bi-trash3 me-1"></i>Padam Semua Data Tersimpan di Pelayar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3 no-print">
+    <div id="appToast" class="toast align-items-center text-bg-dark border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMessage">
+          Mesej pemberitahuan
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- html2pdf.js untuk eksport fail PDF terus dari pelayar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- Bootstrap 5.3.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main Application Logic JS -->
+  <script src="js/app.js"></script>
+</body>
+</html>
